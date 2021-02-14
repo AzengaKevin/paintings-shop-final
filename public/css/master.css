@@ -1,0 +1,29 @@
+
+main .hero{
+    background: orange url('/img/bg.png') no-repeat fixed center center / cover;
+}
+
+
+.product img{
+    transform: scale(1);
+    transition: transform 1s;
+}
+
+.product:hover img{
+    transform: scale(1.05);
+}
+
+
+/** Utilities **/
+.min-h-screen{
+    min-height: 100vh;
+}
+
+.object-cover{
+    object-fit: cover;
+}
+
+.mt-nav{
+    margin-top: 56px;
+}
+
