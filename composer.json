@@ -1,0 +1,16 @@
+{
+    "name": "student/paintings-shop-final",
+    "description": "An web application for adevrtizing and shopping paintings",
+    "authors": [
+        {
+            "name": "Azenga Kevin",
+            "email": "azenga.kevin7@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "./app"
+        }
+    }
+}
