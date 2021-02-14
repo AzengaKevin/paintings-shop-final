@@ -11,9 +11,12 @@ class Database{
     private ?\PDOException $error = null;
     private ?\PDOStatement $stmt = null;
 
-    private static $_instance = null;
+    private static ?Database $_instance = null;
 
-    public static function init()
+    /**
+     * Initialize a sing Database instance
+     */
+    public static function init() : Database
     {
         if(is_null(self::$_instance) || empty(self::$_instance)){
             self::$_instance = new self();
@@ -43,11 +46,23 @@ class Database{
 
     }
 
+    /**
+     * Prepares a query and sets the internal stmt property
+     * 
+     * @param string query to compile
+     */
     public function prepare($query)
     {
         $this->stmt = $this->pdo->prepare($query);
     }
 
+    /**
+     * Binds parameters for the compiled query
+     * 
+     * @param $param query parameter
+     * @param $value value for the query parameter
+     * @param $type the of the $value for the parameter
+     */
     public function bind($param, $value, $type = NULL)
     {
         if (is_null($type)) {
@@ -72,11 +87,21 @@ class Database{
 
     }
    
+    /**
+     * Excecutes internal PDOStatement
+     * 
+     * @return bool of whether the execution was successful
+     */
    public function execute()
    {
        return $this->stmt->execute();
    }
 
+   /**
+    * Executes the internal statement and gets multiple results for the query
+    *
+    * @return array of the results
+    */
    public function resultSet()
    {
        $this->execute();
@@ -84,6 +109,11 @@ class Database{
        return $this->stmt->fetchAll();
    }
 
+   /**
+    * Executes the internal statement and gets single result for the query
+    *
+    * @return object of the result
+    */   
    public function single()
    {
        $this->execute();
@@ -91,16 +121,46 @@ class Database{
        return $this->stmt->fetch();
    }
 
+   /**
+    * Counts the number of items in the result
+    * 
+    * @return int number of items in result
+    */
    public function rowCount()
    {
        return $this->stmt->rowCount();
    }
 
+   /**
+    * Gets the database last inserted id
+    *
+    * @return int last inserted id
+    */
    public function lastInsertId()
    {
        return $this->pdo->lastInsertId();
    }
 
+   /**
+    * Begins a database transaction
+    */
+   public function beginTransacton()
+   {
+       $this->pdo->beginTransaction();
+   }
+
+   /**
+    * Commits pending transaction
+    */
+   public function commit()
+   {
+       $this->pdo->commit();
+   }
+
+   /**
+    * Gets any available errors
+    * @return string
+    */
    public function getErrorMessage()
    {
        if(!is_null($this->error)){
