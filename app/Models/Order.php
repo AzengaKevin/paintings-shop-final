@@ -12,6 +12,11 @@ class Order{
 
     }
 
+    /**
+     * Get a particular user orders
+     * 
+     * @param int $userId, the user in question, currently logged in
+     */
     public function findUserOrders($userId)
     {
         $query = "SELECT orders.id, orders.user_id, orders.paid, paypal_order_id,  SUM(products.price * order_items.quantity) AS amount, COUNT(order_items.id) AS items
@@ -28,8 +33,29 @@ class Order{
         $this->db->bind("user_id", $userId, \PDO::PARAM_INT);
 
         return $this->db->resultSet();
-
     }
+
+    /**
+     * Get all orders from the database with the user who added the orders
+     * 
+     * @return all the orders from the database
+     */
+    public function findAll()
+    {
+        $query = "SELECT orders.id, orders.user_id, orders.paid, orders.paypal_order_id, users.name AS user, SUM(products.price * order_items.quantity) AS amount, COUNT(order_items.id) AS items
+        FROM orders
+        INNER JOIN users
+        ON orders.user_id = users.id
+        INNER JOIN order_items
+        ON orders.id = order_items.order_id
+        INNER JOIN products
+        ON order_items.product_id = products.id
+        GROUP BY orders.id";
+
+        $this->db->prepare($query);
+
+        return $this->db->resultSet();
+    }    
 
     /**
      * Persists an order to the database
@@ -142,5 +168,23 @@ class Order{
         $this->db->bind('id', $orderId);
 
         return $this->db->execute();
+    }
+
+    /**
+     * Delete an order and its items from the database
+     * 
+     * @return bool of the whether the order was deleted
+     */
+    public function delete($orderId)
+    {
+        $query = "DELETE FROM orders
+        WHERE id = :id";
+
+        $this->db->prepare($query);
+
+        $this->db->bind('id', $orderId);
+
+        return $this->db->execute();
+        
     }
 }

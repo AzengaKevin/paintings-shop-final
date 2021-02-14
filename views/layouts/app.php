@@ -68,6 +68,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/orders">Order History</a>
+                                <?php if(isAdmin()) : ?>
+                                <a class="dropdown-item" href="/admin/orders">All Orders</a>
+                                <?php endif; ?>
                                 <a class="dropdown-item" role="button" data-toggle="modal" data-target="#logout-modal"
                                     href="#">Logout</a>
                             </div>

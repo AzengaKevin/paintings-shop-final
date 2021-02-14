@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\Database;
+use App\Http\Controllers\AdminOrdersController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
@@ -28,12 +29,13 @@ $router->post('/products/delete', [ProductsController::class, 'delete']);
 $router->post('/products/update', [ProductsController::class, 'update']);
 
 $router->get('/orders', [OrdersController::class, 'index']);
+$router->get('/admin/orders', [AdminOrdersController::class, 'index']);
 $router->get('/orders/create', [OrdersController::class, 'create']);
 $router->get('/orders/edit', [OrdersController::class, 'edit']);
 $router->get('/orders/show', [OrdersController::class, 'show']);
 
 $router->post('/orders', [OrdersController::class, 'store']);
-$router->post('/orders/delete', [OrdersController::class, 'delete']);
+$router->post('/admin/orders/delete', [AdminOrdersController::class, 'delete']);
 $router->post('/orders/update', [OrdersController::class, 'update']);
 
 $router->post('/cart', [CartController::class, 'show']);

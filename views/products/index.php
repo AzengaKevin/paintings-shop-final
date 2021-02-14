@@ -2,7 +2,12 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <h1 class="h4 font-weight-bold">All Products</h1>
+
+            <?php if(isLoggedIn()) : ?>
+            <?php if(isLoggedIn()): ?>
             <a href="/products/create">Add Product</a>
+            <?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <form class="input-group my-3">

@@ -45,6 +45,11 @@ function isLoggedIn()
     return array_key_exists('user', $_SESSION);
 }
 
+function isAdmin()
+{
+    return $_SESSION['user']['user_type'] === 'Admin';
+}
+
 /**
  * Counts the number of items in the session cart 
  * 

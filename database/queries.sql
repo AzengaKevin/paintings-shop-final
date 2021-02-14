@@ -31,3 +31,17 @@ INNER JOIN products
 ON order_items.product_id = products.id
 WHERE orders.user_id = 25
 GROUP BY orders.id; 
+
+SELECT orders.id, orders.user_id, orders.paid, orders.paypal_order_id, users.name AS user, SUM(products.price * order_items.quantity) AS amount, COUNT(order_items.id) AS items
+FROM orders
+INNER JOIN users
+ON orders.user_id = users.id
+INNER JOIN order_items
+ON orders.id = order_items.order_id
+INNER JOIN products
+ON order_items.product_id = products.id
+GROUP BY orders.id; 
+
+
+DELETE FROM orders
+WHERE id = 19;
