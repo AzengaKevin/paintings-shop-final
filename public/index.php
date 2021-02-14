@@ -47,5 +47,7 @@ $router->get('/register', [RegisterController::class, 'show']);
 $router->post('/register', [RegisterController::class, 'store']);
 
 $router->get('/checkout/create', [CheckoutController::class, 'create']);
+$router->get('/checkout/show', [CheckoutController::class, 'show']);
+$router->post('/checkout', [CheckoutController::class, 'store']);
 
 $router->resolve();
