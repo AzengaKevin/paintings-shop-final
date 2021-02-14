@@ -79,4 +79,49 @@ class Order{
         return $this->db->single();
 
     }
+
+    /**
+     * Update an order
+     * 
+     * @param array $data of payment and id
+     * 
+     * @return bool of whether the order was update of not
+     * 
+     */
+    public function update($data)
+    {
+        $query = "UPDATE orders 
+        SET payment = :payment, paypal_order_id = :paypal_order_id
+        WHERE id = :id";
+
+        $this->db->prepare($query);
+
+        $this->db->bind('payment', $data['payment']);
+        $this->db->bind('paypal_order_id', $data['paypal_order_id']);
+        $this->db->bind('id', $data['id']);
+
+        return $this->db->execute();
+    }
+
+    /**
+     * Update an order
+     * 
+     * @param array $data of payment and id
+     * 
+     * @return bool of whether the order was update of not
+     * 
+     */
+    public function setPaid($orderId)
+    {
+        $query = "UPDATE orders 
+        SET paid = :paid
+        WHERE id = :id";
+
+        $this->db->prepare($query);
+
+        $this->db->bind('paid', true);
+        $this->db->bind('id', $orderId);
+
+        return $this->db->execute();
+    }
 }
