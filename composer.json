@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^7.2"
+        "guzzlehttp/guzzle": "^7.2",
+        "paypal/paypal-checkout-sdk": "^1.0"
     },
     "autoload": {
         "psr-4": {

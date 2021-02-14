@@ -61,7 +61,7 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-end">
                 <button class="btn btn-secondary">Update Cart</button>
-                <a href="/order.php" class="btn btn-success mt-3 mt-md-0 ml-0 ml-md-3">Review Cart</a>
+                <a href="/orders/create" class="btn btn-success mt-3 mt-md-0 ml-0 ml-md-3">Review Cart</a>
             </div>
         </form>
 

@@ -4,6 +4,8 @@ use App\Core\Database;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Router;
@@ -25,6 +27,15 @@ $router->post('/products', [ProductsController::class, 'store']);
 $router->post('/products/delete', [ProductsController::class, 'delete']);
 $router->post('/products/update', [ProductsController::class, 'update']);
 
+$router->get('/orders', [OrdersController::class, 'index']);
+$router->get('/orders/create', [OrdersController::class, 'create']);
+$router->get('/orders/edit', [OrdersController::class, 'edit']);
+$router->get('/orders/show', [OrdersController::class, 'show']);
+
+$router->post('/orders', [OrdersController::class, 'store']);
+$router->post('/orders/delete', [OrdersController::class, 'delete']);
+$router->post('/orders/update', [OrdersController::class, 'update']);
+
 $router->post('/cart', [CartController::class, 'show']);
 $router->get('/cart', [CartController::class, 'show']);
 
@@ -34,5 +45,7 @@ $router->post('/logout', [LoginController::class, 'destroy']);
 
 $router->get('/register', [RegisterController::class, 'show']);
 $router->post('/register', [RegisterController::class, 'store']);
+
+$router->get('/checkout/create', [CheckoutController::class, 'create']);
 
 $router->resolve();
