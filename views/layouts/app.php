@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/vendor/fontawesome-free-5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="/css/master.css" />
 
-    <base href="http://localhost:8080">
+    <base href="<?= \BASE_URL ?>">
 
     <title>Sell You Painting Online - Art & Painting Shop</title>
 </head>

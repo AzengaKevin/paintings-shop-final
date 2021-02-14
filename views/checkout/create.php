@@ -36,7 +36,10 @@
 
                     <div class="form-group">
                         <input type="hidden" name="amount" value="<?= $order->amount ?>">
+                        <input type="hidden" name="order_id" value="<?= $order->id ?>">
                     </div>
+
+                    
 
                     <div class="form-group">
                         <label for="payment-method">Payment Method</label>
