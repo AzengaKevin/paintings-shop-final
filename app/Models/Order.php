@@ -12,6 +12,25 @@ class Order{
 
     }
 
+    public function findUserOrders($userId)
+    {
+        $query = "SELECT orders.id, orders.user_id, orders.paid, paypal_order_id,  SUM(products.price * order_items.quantity) AS amount, COUNT(order_items.id) AS items
+        FROM orders
+        INNER JOIN order_items
+        ON orders.id = order_items.order_id
+        INNER JOIN products
+        ON order_items.product_id = products.id
+        WHERE orders.user_id = :user_id
+        GROUP BY orders.id";
+
+        $this->db->prepare($query);
+
+        $this->db->bind("user_id", $userId, \PDO::PARAM_INT);
+
+        return $this->db->resultSet();
+
+    }
+
     /**
      * Persists an order to the database
      * 

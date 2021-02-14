@@ -22,3 +22,12 @@ SET paid = false, payment = '"{"amount":1000,"tax":null,"date":1613310919}"'
 WHERE id = 21;
 
 ALTER TABLE orders ADD paypal_order_id VARCHAR(255);
+
+SELECT orders.id, orders.user_id, orders.paid, paypal_order_id,  SUM(products.price * order_items.quantity) AS amount, COUNT(order_items.id) AS items
+FROM orders
+INNER JOIN order_items
+ON orders.id = order_items.order_id
+INNER JOIN products
+ON order_items.product_id = products.id
+WHERE orders.user_id = 25
+GROUP BY orders.id; 

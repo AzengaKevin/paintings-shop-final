@@ -9,9 +9,26 @@ class OrdersController
     /**
      * Display the current user orders
      */
-    public function index()
+    public function index(Router $router)
     {
-        # code...
+        $userId = $_SESSION['user']['id'] ?? null;
+
+        if($userId){
+            $o = new Order;
+
+            $router->render("orders/index", [
+                'orders' => $o->findUserOrders($userId)
+            ]);
+
+        }else{
+            
+            $_SESSION['message']['content'] = 'A fatal error occured';
+
+            $_SESSION['message']['type'] = 'danger';
+
+            header('Location: /');
+
+        }
     }
 
 
