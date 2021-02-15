@@ -34,19 +34,27 @@ class Router{
 
     public function resolve()
     {
-        $pathInfo = $_SERVER['PATH_INFO'] ?? "/";
+        $requestUri = $_SERVER['REQUEST_URI'] ?? "/";
+
+        $requestUrl = $requestUri;
+
+        if(strpos($requestUri, '?') !== false){
+            $requestUrl = substr($requestUri, 0, strpos($requestUri, '?'));
+        }
 
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                $callable = $this->postRoutes[$pathInfo] ?? null;
+                $callable = $this->postRoutes[$requestUrl] ?? null;
                 break;
             case 'GET':
-                $callable = $this->getRoutes[$pathInfo] ?? null;
+                $callable = $this->getRoutes[$requestUrl] ?? null;
                 break;
         }
 
         if (empty($callable)) {
+
             die("<h1>404</h1>");
+            
         }else{
             call_user_func($callable, $this);
         }
